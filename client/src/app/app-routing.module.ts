@@ -8,6 +8,7 @@ import { CreateBlogFormComponent } from './blog/create-blog-form/create-blog-for
 import { BlogViewDetailsComponent } from './blog/blog-view-details/blog-view-details.component';
 import{PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreatePortfolioFormComponent } from './portfolio/create-portfolio-form/create-portfolio-form.component';
+import { ViewPortfolioDetailsComponent } from './portfolio/view-portfolio-details/view-portfolio-details.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent},
   { path: 'createBlog', component: CreateBlogFormComponent},
   { path: 'blogView/:id', component: BlogViewDetailsComponent},
+  { path: 'portfolioView/:id', component: ViewPortfolioDetailsComponent},
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'createPortfolio', component: CreatePortfolioFormComponent },
   { path: 'contact', component: ContactComponent },

@@ -19,9 +19,9 @@
                 <div class="hover">
                   <div class="link-btns">
                     <a href="{{portfolio.image}}" title="pic 02" class="galery-item"><i class="fa fa-search-plus"></i></a>
-                    <a href="portfolio-detail.html"><i class="fa fa-link"></i></a>
+                    <a [routerLink] = "['/portfolioView', portfolio.id]"><i class="fa fa-link"></i></a>
                   </div>
-                  <a href="portfolio-detail.html" class="project-title">{{portfolio.titel}}</a>
+                  <a [routerLink] = "['/portfolioView', portfolio.id]" class="project-title">{{portfolio.titel}}</a>
                 </div>
               </div>
             </div>

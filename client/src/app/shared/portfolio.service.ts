@@ -19,4 +19,9 @@ export class PortfolioService {
   getPortfolios(){
   this.http.get(this.baseURl).toPromise().then(res => this.list = res as Portfolio[])
   }
+
+  
+  getPortfolioById(id:any) {
+    return this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Portfolio[]);
+  }
 }
