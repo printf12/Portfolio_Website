@@ -17,9 +17,9 @@ namespace API.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("API.Entities.BolgPost", b =>
+            modelBuilder.Entity("API.Entities.BlogPost", b =>
                 {
                     b.Property<int>("BlogPostId")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace API.Migrations
 
                     b.HasKey("BlogPostId");
 
-                    b.ToTable("BolgPost");
+                    b.ToTable("BlogPost");
                 });
 
             modelBuilder.Entity("API.Entities.Portfolio", b =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201230130541_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20210102203043_secondMigr")]
+    partial class secondMigr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,9 +19,9 @@ namespace API.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("API.Entities.BolgPost", b =>
+            modelBuilder.Entity("API.Entities.BlogPost", b =>
                 {
                     b.Property<int>("BlogPostId")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace API.Migrations
 
                     b.HasKey("BlogPostId");
 
-                    b.ToTable("BolgPost");
+                    b.ToTable("BlogPost");
                 });
 
             modelBuilder.Entity("API.Entities.Portfolio", b =>

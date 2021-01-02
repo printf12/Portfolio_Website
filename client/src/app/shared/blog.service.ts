@@ -10,7 +10,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}  
   fromData: Blog = new Blog();
   list : Blog[];
-  readonly baseURl = 'https://localhost:44376/api/BolgPost';
+  readonly baseURl = 'https://localhost:44376/api/BlogPost';
 
   postCreateNewBlog(){
     return this.http.post(this.baseURl, this.fromData);

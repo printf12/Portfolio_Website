@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Entities
 {
-    public class BolgPost
+    public class BlogPost
     {
         [Key]
         public int BlogPostId { get; set; }

@@ -12,41 +12,41 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BolgPostController : ControllerBase
+    public class BlogPostController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public BolgPostController(DataContext context)
+        public BlogPostController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/BolgPost
+        // GET: api/BlogPost
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BolgPost>>> GetBolgPost()
+        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPost()
         {
-            return await _context.BolgPost.ToListAsync();
+            return await _context.BlogPost.ToListAsync();
         }
 
-        // GET: api/BolgPost/5
+        // GET: api/BlogPost/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<BolgPost>> GetBolgPost(int id)
+        public async Task<ActionResult<BlogPost>> GetBlogPost(int id)
         {
-            var bolgPost = await _context.BolgPost.FindAsync(id);
+            var blogPost = await _context.BlogPost.FindAsync(id);
 
-            if (bolgPost == null)
+            if (blogPost == null)
             {
                 return NotFound();
             }
 
-            return bolgPost;
+            return blogPost;
         }
 
-        // PUT: api/BolgPost/5
+        // PUT: api/BlogPost/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBolgPost(int id, BolgPost bolgPost)
+        public async Task<IActionResult> PutBlogPost(int id, BlogPost bolgPost)
         {
             if (id != bolgPost.BlogPostId)
             {
@@ -61,7 +61,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BolgPostExists(id))
+                if (!BlogPostExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,42 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/BolgPost
+        // POST: api/BlogPost
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<BolgPost>> PostBolgPost(BolgPost bolgPost)
+        public async Task<ActionResult<BlogPost>> PostBlogPost(BlogPost blogPost)
         {
-            _context.BolgPost.Add(bolgPost);
+            _context.BlogPost.Add(blogPost);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBolgPost", new { id = bolgPost.BlogPostId }, bolgPost);
+            return CreatedAtAction("GetBlogPost", new { id = blogPost.BlogPostId }, blogPost);
         }
 
-        // DELETE: api/BolgPost/5
+        // DELETE: api/BlogPost/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BolgPost>> DeleteBolgPost(int id)
+        public async Task<ActionResult<BlogPost>> DeleteBlogPost(int id)
         {
-            var bolgPost = await _context.BolgPost.FindAsync(id);
+            var bolgPost = await _context.BlogPost.FindAsync(id);
             if (bolgPost == null)
             {
                 return NotFound();
             }
 
-            _context.BolgPost.Remove(bolgPost);
+            _context.BlogPost.Remove(bolgPost);
             await _context.SaveChangesAsync();
 
             return bolgPost;
         }
 
-        private bool BolgPostExists(int id)
+        private bool BlogPostExists(int id)
         {
-            return _context.BolgPost.Any(e => e.BlogPostId == id);
+            return _context.BlogPost.Any(e => e.BlogPostId == id);
         }
+
+        //public async Task<ActionResult<BlogPost>> GetFirstBlogPost()
+        //{
+        //    return await _context.BlogPost.FindAsync();
+        //}
     }
 }
