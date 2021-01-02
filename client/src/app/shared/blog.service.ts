@@ -21,6 +21,6 @@ export class BlogService {
   }
 
   getBlogById(id:any) {
-    this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Blog[]);
+    return this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Blog[]);
   }
 }

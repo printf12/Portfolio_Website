@@ -38,7 +38,7 @@
                   <span><i class="fa fa-folder-o"></i> {{blog.blogPostType}}</span>
                 </div>
                 <p>{{blog.description}}</p>
-                <a [routerLink] = "['/blogView', blog.blogPostId]" class="btn btn-xs btn-flat-solid primary-btn">{{blog.title}}</a>
+                <a [routerLink] = "['/blogView', blog.blogPostId]" class="btn btn-xs btn-flat-solid primary-btn">Read more</a>
               </div>
             </div>
           </li>
@@ -49,8 +49,8 @@
         <div class="text-center">
           <ul class="pagination   flat-pagination ">
             <li><a href="#">Prev</a></li>
-            <li><a href="#">1</a></li>
-            <li class="active"><span>2</span></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><span>2</span></li>
             <li><a href="#">3</a></li>
             <li><a href="#">Next</a></li>
           </ul>
