@@ -1,0 +1,50 @@
+<section  class="block-section">
+    <div class="block-page">
+    <div class="container-medium">
+    <h2>CreateBlog</h2>
+    <form #form="ngForm" (submit)="onSubmit(form)">
+        <input type="hidden" name="blogPostId"
+        [value]="service.fromData.blogPostId">
+    
+        <div class="form-group">
+            <label>BlogType</label>
+            <select class="form-control" name="blogType" id="blog_type" [(ngModel)]="service.fromData.blogPostType"
+            #blogType="ngModel" required [class.invalid]="blogType.invalid
+            && blogType.touched">
+            <option [ngValue]="0">{{ ("None") }}</option>
+            <option [ngValue]="1">{{ ("Checklists") }}</option>
+            <option [ngValue]="2">{{ ("Infographics") }}</option>
+            <option [ngValue]="3">{{ ("Interviews") }}</option>
+            <option [ngValue]="4">{{ ("GuestBlogging") }}</option>
+            <option [ngValue]="5">{{ ("PersonalStories") }}</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control form-control-lg" placeholder="Title"
+            name="title" #title="ngModel" [(ngModel)]="service.fromData.title" required [class.invalid]="title.invalid
+            && title.touched">
+        </div>
+        <div class="form-group">
+            <label>DayOfCreation</label>
+            
+            <dp-date-picker name="dayOfCreation" #dayOfCreation="ngModel" [(ngModel)]="service.fromData.creationDay" required [class.invalid]="dayOfCreation.invalid
+            && dayOfCreation.touched"> </dp-date-picker>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input class="form-control form-control-lg" placeholder="description"
+            name="description" #description="ngModel" [(ngModel)]="service.fromData.description" required [class.invalid]="description.invalid
+            && description.touched">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">create</button>
+            <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">reset</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</section>

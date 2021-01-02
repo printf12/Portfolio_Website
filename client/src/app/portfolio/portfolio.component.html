@@ -1,0 +1,45 @@
+<section id="portfolio" class="block-section">
+    <!-- TITLE PAGE-->
+    <div class=" shape-bottom">
+      <div class="bg-secondary block-title">
+        <div class="container">
+          <h2 class="text-uppercase color-dark text-bold no-margin">My Portfolio</h2>
+          <div class="title-icon"> <i class="fa fa-inbox"></i> </div>
+        </div>
+      </div>
+    </div><!--END  TITLE PAGE-->
+
+    <div class="block-page">
+      <div class="container-medium clearfix">
+        <div class="row list-work">
+          <div class="col-md-4 col-sm-6" *ngFor="let portfolio of service.list">
+            <div class="box-work">
+              <div class="work-preview">
+                <img src={{portfolio.image}} alt="{{portfolio.image}}">
+                <div class="hover">
+                  <div class="link-btns">
+                    <a href="{{portfolio.image}}" title="pic 02" class="galery-item"><i class="fa fa-search-plus"></i></a>
+                    <a href="portfolio-detail.html"><i class="fa fa-link"></i></a>
+                  </div>
+                  <a href="portfolio-detail.html" class="project-title">{{portfolio.titel}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!--End List WOrk-->
+
+
+        <!--Pagination-->
+        <div class="text-center">
+          <ul class="pagination   flat-pagination ">
+            <li><a href="#">Prev</a></li>
+            <li><span>1</span></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+        <!--End Pagination-->
+      </div>
+    </div>
+  </section>

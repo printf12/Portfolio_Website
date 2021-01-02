@@ -1,0 +1,62 @@
+<section id="blog" class="block-section">
+    <!-- TITLE PAGE -->
+    <div class=" shape-bottom">
+      <div class="bg-secondary block-title">
+        <div class="container">
+          <h2 class="text-uppercase color-dark text-bold no-margin">MY BLOG</h2>
+          <div class="title-icon"> <i class="fa fa-inbox"></i> </div>
+        </div>
+      </div>
+    </div><!-- END TITLE PAGE -->
+
+
+    <div class="block-page">
+      <div class="container-medium">
+
+        <!-- FORM SEARCH-->
+        <form class="box-widget">
+          <div class="input-group">
+            <input type="text" placeholder="Keywords" name="search" class="form-control form-flat ">
+            <span class="input-group-btn">
+              <button class="btn primary-btn btn-flat-solid btn-icon " type="button"><i class="fa fa-search"></i></button>
+            </span>
+          </div>
+        </form><!-- END FORM SEARCH-->
+
+        <!-- LIST BLOG-->
+        <ul class="list-unstyled list-blog">
+          <li *ngFor="let blog of service.list">
+            <div class="clearfix box-blog">
+              <div class="blog-bg" data-holdbg="assets/theme/images/blog/1.jpg" style="background-image: url(&quot;assets/theme/images/blog/1.jpg&quot;);">&nbsp;
+                <div class="blog-ic"><i class="fa fa-pencil"></i></div>
+              </div>
+              <div class="blog-content">
+                <h5 class="text-uppercase color-dark text-bold">{{blog.title}}.</h5>
+                <div class="post-meta font-alt">
+                  <span><i class="fa fa-calendar"></i> {{blog.creationDay}}</span>
+                  <!-- <span><i class="fa fa-user"></i> Jack</span> -->
+                  <span><i class="fa fa-folder-o"></i> {{blog.blogPostType}}</span>
+                </div>
+                <p>{{blog.description}}</p>
+                <a [routerLink] = "['/blogView', blog.blogPostId]" class="btn btn-xs btn-flat-solid primary-btn">{{blog.title}}</a>
+              </div>
+            </div>
+          </li>
+        </ul><!-- END LIST BLOG--> 
+
+
+        <!--Pagination-->
+        <div class="text-center">
+          <ul class="pagination   flat-pagination ">
+            <li><a href="#">Prev</a></li>
+            <li><a href="#">1</a></li>
+            <li class="active"><span>2</span></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+        <!--End Pagination-->
+      </div>
+
+    </div>
+  </section>
