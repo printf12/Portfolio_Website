@@ -19,6 +19,7 @@ export class CommentService {
       console.log(comment);
     return this.http.post("https://localhost:44376/api/comment", comment).toPromise().then(res => {
         console.log(res);
+        return this.getCommentsByBlogId(comment.BlogPost.blogPostId);
 
     });
   }

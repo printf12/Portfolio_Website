@@ -19,9 +19,13 @@ export class BlogViewDetailsComponent implements OnInit {
   constructor(private toastr:ToastrService, public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
 
   comments:Comment[]= [];
+  commentsUpdated:Comment[]= [];
 
   showCommentReplyInput = false;
  
+
+  showComments = true;
+  showCommentsUpdate = false;
   ngOnInit(){ 
     let id = this.route.snapshot.paramMap.get("id");
     this.service.getBlogById(id).then(response => {
@@ -50,7 +54,10 @@ export class BlogViewDetailsComponent implements OnInit {
     comment["BlogPost"] = resp;
     comment["CommentedAt"] = "now";
     this.commentService.submitComment(comment).then(res => {
-      this.toastr.success('Submitted successfully', 'Comment Created')
+      this.toastr.success('Submitted successfully', 'Comment Created');
+      this.showComments = false;
+      this.showCommentsUpdate = true;
+      this.commentsUpdated = res;
     });
     
     })

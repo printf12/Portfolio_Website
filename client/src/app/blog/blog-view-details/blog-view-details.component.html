@@ -26,9 +26,31 @@
           </div>
           <div class="white-space-40"></div>
           <h4 class="color-dark text-uppercase text-bold">Comments</h4>
-          <ol class="comments">
+          <ol class="comments" *ngIf="showComments">
             <li>
               <div *ngFor="let comment of comments"  class="post-comment-block" >
+                <div class="img-thumbnail"> <img src="assets/theme/images/people/1.jpg" alt="avatar"> </div>
+                <!--<button class="btn btn-link btn-xs btn-flat-line pull-right" (click)="replayCommentBtnClick()">Reply</button>-->
+                <h5 class="no-margin-bottom">{{comment.commentedBy}} <small>says:</small></h5>
+                <span class="meta-data">{{comment.commentedAt}}</span>
+                <div class="clearfix white-space-10"></div>
+                <p>{{comment.commentText}}</p>
+                <!--<ul>
+                  <li>
+                    <div class="post-comment-block" *ngIf="showCommentReplyInput">
+                      <textarea name="message" rows="3" aria-required="true" class="form-control form-flat" *ngModel="message"></textarea>
+                      <button class="btn btn-link btn-xs btn-flat-line pull-right" (click)="saveCommentReply()">Send</button>
+                    </div>
+                  </li>
+                </ul>-->
+              </div>
+              
+            </li>
+          </ol>
+
+          <ol class="comments" *ngIf="showCommentsUpdate">
+            <li>
+              <div *ngFor="let comment of commentsUpdated"  class="post-comment-block" >
                 <div class="img-thumbnail"> <img src="assets/theme/images/people/1.jpg" alt="avatar"> </div>
                 <!--<button class="btn btn-link btn-xs btn-flat-line pull-right" (click)="replayCommentBtnClick()">Reply</button>-->
                 <h5 class="no-margin-bottom">{{comment.commentedBy}} <small>says:</small></h5>
