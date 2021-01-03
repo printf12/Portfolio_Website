@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog, BlogPostType } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
+import { CommentService } from 'src/app/shared/comment.service';
 import { BlogComponent } from '../blog.component';
 
 @Component({
@@ -13,43 +14,12 @@ import { BlogComponent } from '../blog.component';
 export class BlogViewDetailsComponent implements OnInit {
   data:any;
   blogDetails:Blog[] = [];
- 
-  constructor(public service:BlogService, private route:ActivatedRoute, private router: Router) { }
+  comment: any = {};
+  constructor(public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
 
- comments = [
-  {
-    "id": 1,
-    "name": "Hardik",
-    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed",
-    "time": "just Now"
-  },
-  {
-    "id": 2,
-    "name": "Paresh",
-    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
-    "time": "just Now"
-  },
-  {
-    "id": 3,
-    "name": "Kiran",
-    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed",
-    "time": "just Now"
-  },
-  {
-    "id": 4,
-    "name": "Mahesh",
-    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
-    "time": "just Now"
-  },
-  {
-    "id": 5,
-    "name": "Karan",
-    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
-    "time": "just Now"
-  }
-]
+  comments:Comment[]= [];
 
-showCommentReplyInput = false;
+  showCommentReplyInput = false;
  
   ngOnInit(){ 
     let id = this.route.snapshot.paramMap.get("id");
@@ -59,10 +29,31 @@ showCommentReplyInput = false;
       response['blogType'] = blogType;
       this.blogDetails = response;
     });
-
+    this.getComments();
   }
 
-  replayCommentBtnClick(){
+  getComments(){
+    this.commentService.getComments().then(response => {
+      this.comments = response;
+    });
+  }
+
+  submitComment(comment: any) {
+    let blogId = this.route.snapshot.paramMap.get("id"); 
+    //comment['blogId'] = blogId;
+   
+    console.log(comment);
+    this.service.getBlogById(blogId).then(resp => {
+      console.log(resp);
+    comment["BlogPostId"] = resp;
+    comment["CommentedAt"] = "now";
+    this.commentService.submitComment(comment);
+    })
+
+    
+  }
+
+  /*replayCommentBtnClick(){
     if(this.showCommentReplyInput == false){
       this.showCommentReplyInput = true;
     }
@@ -70,7 +61,7 @@ showCommentReplyInput = false;
       this.showCommentReplyInput = false;
     }
     
-  }
+  }*/
 
 
 
