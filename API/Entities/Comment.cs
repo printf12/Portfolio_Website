@@ -14,6 +14,7 @@ namespace API.Entities
         public string CommentedBy { get; set; }
         public string CommentedAt { get; set; }
         public string Email { get; set; }
-        public virtual BlogPost BlogPostId { get; set; }
+        [ForeignKey("BlogPost_Id")]
+        public virtual BlogPost BlogPost { get; set; }
     }
 }

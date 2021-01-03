@@ -19,6 +19,6 @@ namespace API.Entities
         public DateTime? CreationDay { get; set; }
 
         public string Description { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        
     }
 }
