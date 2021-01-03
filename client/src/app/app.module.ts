@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreatePortfolioFormComponent } from './portfolio/create-portfolio-form/create-portfolio-form.component';
 import { ViewPortfolioDetailsComponent } from './portfolio/view-portfolio-details/view-portfolio-details.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -36,8 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BlogViewDetailsComponent,
     PageNotFoundComponent,
     CreatePortfolioFormComponent,
-    ViewPortfolioDetailsComponent,
-    DashboardComponent
+    ViewPortfolioDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +46,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DpDatePickerModule,
     CommonModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]
