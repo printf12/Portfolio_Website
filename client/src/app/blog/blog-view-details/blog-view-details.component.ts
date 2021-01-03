@@ -45,7 +45,7 @@ export class BlogViewDetailsComponent implements OnInit {
     console.log(comment);
     this.service.getBlogById(blogId).then(resp => {
       console.log(resp);
-    comment["BlogPostId"] = resp;
+    comment["BlogPost"] = resp;
     comment["CommentedAt"] = "now";
     this.commentService.submitComment(comment);
     })
