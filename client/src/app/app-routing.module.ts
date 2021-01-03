@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'portfolioView/:id', component: ViewPortfolioDetailsComponent},
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'createPortfolio', component: CreatePortfolioFormComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: 'contact', component: ContactComponent },//DashBoard
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
 
