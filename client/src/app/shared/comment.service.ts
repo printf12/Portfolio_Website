@@ -10,14 +10,16 @@ export class CommentService {
 
   comments: Comment[] = [];
   
-  getComments(){
-    return this.http.get("https://localhost:44376/api/comment").toPromise().then(res => this.comments = res as Comment[])
+  getCommentsByBlogId(blogId){
+    console.log(blogId);
+    return this.http.get("https://localhost:44376/api/comment"+"/"+blogId).toPromise().then(res => this.comments = res as Comment[])
   }
 
   submitComment(comment: any){
       console.log(comment);
     return this.http.post("https://localhost:44376/api/comment", comment).toPromise().then(res => {
         console.log(res);
+
     });
   }
 }

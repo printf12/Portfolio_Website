@@ -18,13 +18,21 @@ namespace API.Controllers
         public CommentController(DataContext context)
         {
             _context = context;
+
         }
 
-        // GET: api/comment
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comment>>> getComments()
+        // GET: api/comment/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Comment>>> getComments(int id)
         {
-            return await _context.Comment.ToListAsync();
+            List<Comment> result = null;
+          
+            
+                result = _context.Comment.Where(
+                       s => s.BlogPost.BlogPostId == id).ToList();
+           
+            return result;
+
         }
 
         // POST: api/comment
@@ -35,8 +43,7 @@ namespace API.Controllers
             comment.BlogPost = comentDB;
             _context.Comment.Add(comment);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
+            return Ok();
         }
     }
 }

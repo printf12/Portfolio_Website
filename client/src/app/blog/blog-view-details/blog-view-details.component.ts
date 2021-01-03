@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Blog, BlogPostType } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
 import { CommentService } from 'src/app/shared/comment.service';
@@ -15,7 +16,7 @@ export class BlogViewDetailsComponent implements OnInit {
   data:any;
   blogDetails:Blog[] = [];
   comment: any = {};
-  constructor(public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
+  constructor(private toastr:ToastrService, public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
 
   comments:Comment[]= [];
 
@@ -29,11 +30,12 @@ export class BlogViewDetailsComponent implements OnInit {
       response['blogType'] = blogType;
       this.blogDetails = response;
     });
-    this.getComments();
+    this.getCommentsByBlogId(id);
   }
 
-  getComments(){
-    this.commentService.getComments().then(response => {
+  getCommentsByBlogId(blogId){
+    this.comments = [];
+    this.commentService.getCommentsByBlogId(blogId).then(response => {
       this.comments = response;
     });
   }
@@ -47,7 +49,10 @@ export class BlogViewDetailsComponent implements OnInit {
       console.log(resp);
     comment["BlogPost"] = resp;
     comment["CommentedAt"] = "now";
-    this.commentService.submitComment(comment);
+    this.commentService.submitComment(comment).then(res => {
+      this.toastr.success('Submitted successfully', 'Comment Created')
+    });
+    
     })
 
     
