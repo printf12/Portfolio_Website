@@ -17,6 +17,7 @@ namespace API.Data
         public virtual DbSet<Portfolio> Portfolio { get; set; }
 
         public virtual DbSet<BlogPost> BlogPost { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
 
     }
 }

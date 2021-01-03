@@ -13,12 +13,45 @@ import { BlogComponent } from '../blog.component';
 export class BlogViewDetailsComponent implements OnInit {
   data:any;
   blogDetails:Blog[] = [];
-
-
+ 
   constructor(public service:BlogService, private route:ActivatedRoute, private router: Router) { }
 
-  ngOnInit(){
+ comments = [
+  {
+    "id": 1,
+    "name": "Hardik",
+    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed",
+    "time": "just Now"
+  },
+  {
+    "id": 2,
+    "name": "Paresh",
+    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
+    "time": "just Now"
+  },
+  {
+    "id": 3,
+    "name": "Kiran",
+    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed",
+    "time": "just Now"
+  },
+  {
+    "id": 4,
+    "name": "Mahesh",
+    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
+    "time": "just Now"
+  },
+  {
+    "id": 5,
+    "name": "Karan",
+    "commentText": "Curabitur nec nulla lectus, non hendrerit lorem. Quisque lorem risus, porttitor eget fringilla non, vehicula sed tortor. Proin enim quam, vulputate at lobortis quis, condimentum at justo. Phasellus nec nisi justo. Ut luctus",
+    "time": "just Now"
+  }
+]
 
+showCommentReplyInput = false;
+ 
+  ngOnInit(){ 
     let id = this.route.snapshot.paramMap.get("id");
     this.service.getBlogById(id).then(response => {
       console.log(response);
@@ -27,6 +60,16 @@ export class BlogViewDetailsComponent implements OnInit {
       this.blogDetails = response;
     });
 
+  }
+
+  replayCommentBtnClick(){
+    if(this.showCommentReplyInput == false){
+      this.showCommentReplyInput = true;
+    }
+    else {
+      this.showCommentReplyInput = false;
+    }
+    
   }
 
 
