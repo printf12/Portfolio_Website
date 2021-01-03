@@ -31,6 +31,8 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
+            var comentDB = await _context.BlogPost.SingleOrDefaultAsync(c => c.BlogPostId == comment.BlogPost.BlogPostId);
+            comment.BlogPost = comentDB;
             _context.Comment.Add(comment);
             await _context.SaveChangesAsync();
 
