@@ -16,7 +16,7 @@ export class ViewPortfolioDetailsComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get("id");
     this.service.getPortfolioById(id).then(response => {
-    this.portfolioDetails = response;
+      this.portfolioDetails = response;
     });
 
 }

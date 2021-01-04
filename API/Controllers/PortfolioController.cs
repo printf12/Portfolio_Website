@@ -24,11 +24,12 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Portfolio>>> GetPortfolio()
         {
-            return await _context.Portfolio.ToListAsync();
+            return await _context.Portfolio.Take(3).ToListAsync();
         }
 
         // GET: api/Portfolio/5
         [HttpGet("{id}")]
+        [Route("portfolio/{id:int}")]
         public async Task<ActionResult<Portfolio>> GetPortfolio(int id)
         {
             var portfolio = await _context.Portfolio.FindAsync(id);
@@ -39,6 +40,21 @@ namespace API.Controllers
             }
 
             return portfolio;
+        }
+
+        // GET: api/Portfolio/portfolioCount
+        [HttpGet("{portfolioCount}")]
+        [Route("more/{portfolioCount:int}")]
+        public async Task<ActionResult<IEnumerable<Portfolio>>> GetPortfolioMore(int portfolioCount)
+        {
+            var portfolios = await _context.Portfolio.Take(portfolioCount+3).ToListAsync();
+
+            if (portfolios == null)
+            {
+                return NotFound();
+            }
+
+            return portfolios;
         }
 
         // PUT: api/Portfolio/5

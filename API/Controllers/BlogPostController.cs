@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -25,7 +26,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPost()
         {
-            return await _context.BlogPost.ToListAsync();
+            return await _context.BlogPost.Take(3).ToListAsync();
         }
 
         // GET: api/BlogPost/{id}
@@ -40,6 +41,20 @@ namespace API.Controllers
             }
 
             return blogPost;
+        }
+
+        // GET: api/Blog/blogCount
+        [HttpGet("{blogCount}")]
+        [Route("more/{blogCount:int}")]
+        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogMore(int blogCount)
+        {
+            var blogs = await _context.BlogPost.Take(blogCount + 3).ToListAsync();
+            if (blogs == null)
+            {
+                return NotFound();
+            }
+
+            return blogs;
         }
 
         // PUT: api/BlogPost/5
