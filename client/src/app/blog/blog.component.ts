@@ -7,11 +7,15 @@ import { BlogService } from '../shared/blog.service';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
+  
+  blogs: any = [];
+  
   constructor(public service : BlogService) { }
 
   ngOnInit(): void {
-    this.service.getBlogs();
+    this.service.getBlogs().then(res => {
+      this.blogs = res;
+    });
   }
 
 }
