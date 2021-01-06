@@ -17,11 +17,18 @@ export class PortfolioService {
   }
 
   getPortfolios(){
-  this.http.get(this.baseURl).toPromise().then(res => this.list = res as Portfolio[])
+    return this.http.get(this.baseURl).toPromise();
   }
-
   
   getPortfolioById(id:any) {
     return this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Portfolio[]);
+  }
+
+  getPortfolioByCount(portfoliosCount){
+    return this.http.get(this.baseURl+'/PortfoliosCount/'+portfoliosCount).toPromise();
+  }
+
+  getPagePerIndex(paginationIndex){
+    return this.http.get(this.baseURl+'/PortfolioPerPage/'+paginationIndex).toPromise();
   }
 }

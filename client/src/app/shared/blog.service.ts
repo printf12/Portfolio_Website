@@ -17,10 +17,14 @@ export class BlogService {
   }
 
   getBlogs(){
-  this.http.get(this.baseURl).toPromise().then(res => this.list = res as Blog[])
+    return this.http.get(this.baseURl).toPromise();
   }
 
   getBlogById(id:any) {
-    return this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Blog[]);
+    return this.http.get(this.baseURl+'/'+id).toPromise();
+  }
+
+  getBlogsByCount(blogsCount){
+    return this.http.get(this.baseURl+'/BlogsCount/'+blogsCount).toPromise();
   }
 }

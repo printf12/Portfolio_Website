@@ -19,12 +19,11 @@ export class BlogViewDetailsComponent implements OnInit {
 
   comments:Comment[]= [];
   commentsUpdated:Comment[]= [];
-
+  
   showCommentReplyInput = false;
- 
-
   showComments = true;
   showCommentsUpdate = false;
+
   ngOnInit(){ 
     let id = this.route.snapshot.paramMap.get("id");
     this.service.getBlogById(id).then(response => {

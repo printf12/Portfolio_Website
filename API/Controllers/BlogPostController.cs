@@ -26,7 +26,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPost()
         {
-            return await _context.BlogPost.Take(3).ToListAsync();
+            return await _context.BlogPost.ToListAsync();
         }
 
         // GET: api/BlogPost/{id}
@@ -44,8 +44,7 @@ namespace API.Controllers
         }
 
         // GET: api/Blog/blogCount
-        [HttpGet("{blogCount}")]
-        [Route("more/{blogCount:int}")]
+        [HttpGet("BlogsCount/{blogCount}")]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogMore(int blogCount)
         {
             var blogs = await _context.BlogPost.Take(blogCount + 3).ToListAsync();

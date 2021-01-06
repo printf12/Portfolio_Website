@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BlogPostType } from '../shared/blog.model';
+import { BlogService } from '../shared/blog.service';
+import { PortfolioService } from '../shared/portfolio.service';
 
 @Component({
   selector: 'app-home',
@@ -11,15 +13,15 @@ export class HomeComponent implements OnInit {
 
   projects: any = [];
   blogs: any = [];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public service:PortfolioService, private blogService: BlogService) {}
 
   ngOnInit(){
-    this.getPortfolios();
-    this.getBlogs();
+    this.showMoreProjects(this.projects.length);
+    this.showMoreBlogs(this.blogs.length);
   }
 
-  getPortfolios(){
-    this.http.get("https://localhost:44376/api/portfolio").subscribe(response =>{
+  getProjects(){
+    this.service.getPortfolios().then(response =>{
       console.log(response);
       this.projects = response;
       }, error =>{
@@ -28,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   getBlogs(){
-    this.http.get("https://localhost:44376/api/blogPost").subscribe(response =>{
+    this.blogService.getBlogs().then(response =>{
       console.log(response);
       response.forEach(element => {
         element.blogPostType = BlogPostType[element.blogPostType];
@@ -40,7 +42,8 @@ export class HomeComponent implements OnInit {
   }
 
   showMoreProjects(projectsCount) {
-    this.http.get("https://localhost:44376/api/portfolio/more/"+projectsCount).subscribe(response =>{
+    console.log(projectsCount);
+    this.service.getPortfolioByCount(projectsCount).then(response =>{
       console.log(response);
       this.projects = response;
       }, error =>{
@@ -49,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   showMoreBlogs(blogsCount) {
-    this.http.get("https://localhost:44376/api/blogPost/more/"+blogsCount).subscribe(response =>{
+    this.blogService.getBlogsByCount(blogsCount).then(response =>{
       console.log(response);
       response.forEach(element => {
         element.blogPostType = BlogPostType[element.blogPostType];
