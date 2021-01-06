@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Blog, BlogPostType } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
 import { CommentService } from 'src/app/shared/comment.service';
-import { BlogComponent } from '../blog.component';
 
 @Component({
   selector: 'app-blog-view-details',
@@ -64,16 +63,6 @@ export class BlogViewDetailsComponent implements OnInit {
 
     
   }
-
-  /*replayCommentBtnClick(){
-    if(this.showCommentReplyInput == false){
-      this.showCommentReplyInput = true;
-    }
-    else {
-      this.showCommentReplyInput = false;
-    }
-    
-  }*/
 
 
 
