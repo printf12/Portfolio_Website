@@ -34,4 +34,13 @@ export class CreateBlogFormComponent implements OnInit {
     this.service.fromData = new Blog();
   }
 
+  upladoImage(event:any){
+    var file = event.target.files[0];
+    const formData:FormData=new FormData();
+
+    this.service.UploadPhoto(formData).subscribe((data:any)=>{
+      this.service.fromData.imageUrl = this.service.imageUrl;
+    })
+  }
+
 }

@@ -12,11 +12,14 @@ export class BlogService {
   fromData: Blog = new Blog();
   list : Blog[];
   readonly baseURl = 'https://localhost:44376/api/BlogPost';
-  imageUrl : string = "assets/theme/images/my-pict.jpg"
+  readonly imageUrl = "https://localhost:44376/Resources/Images/";
   fileToUpload: File | null;
 
   postCreateNewBlog(){
     return this.http.post(this.baseURl, this.fromData);
+  }
+  UploadPhoto(val:any){
+    return this.http.post(this.imageUrl, this.fromData);
   }
 
   getBlogs(){
@@ -29,15 +32,5 @@ export class BlogService {
 
   getBlogsByCount(blogsCount){
     return this.http.get(this.baseURl+'/BlogsCount/'+blogsCount).toPromise();
-  }
-  handleFileInput(file :FileList){
-  this.fileToUpload = file.item(0);
-  //show Image Preiew
-  var reader = new FileReader();
-  reader.onload = (event:any) => {
-    this.imageUrl = event.target.result;
-  }
-  reader.readAsDataURL(this.fileToUpload)
-
   }
 }

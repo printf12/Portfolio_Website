@@ -7,7 +7,7 @@ export class Blog {
     title:string;
     creationDay:Moment;
     description:string;
-    fileToupload: File;
+    imageUrl: string;
 
 }
 

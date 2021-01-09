@@ -39,10 +39,10 @@
                     <div _ngcontent-qsp-c48="" class="clearfix">
                         <img [src]="service.imageUrl" style="width: 250px; height: 250px;">
                         <input _ngcontent-qsp-c48="" name="upload" type="file" class="btn btn-flat-solid btn-file btn-xs btn-default clearfix" accept="image/*" 
-                        #upload="ngModel" [(ngModel)]="service.fromData.fileToupload"
+                        #upload="ngModel" [(ngModel)]="service.fromData.imageUrl"
                         required [class.invalid]="dayOfCreation.invalid
                         && dayOfCreation.touched"
-                        (change)="service.handleFileInput($event.target.files)"/>
+                        (change)="upladoImage($event)"/>
                     </div>
             </div>
             </div>
@@ -56,7 +56,7 @@
 
             </div>
             <div class="form-group">
-                <label>Your Comment (*)</label>
+                <label>Description(*)</label>
                 <textarea name="description" #description="ngModel" [(ngModel)]="service.fromData.description" required [class.invalid]="description.invalid
                 && description.touched" rows="6" class="form-control form-flat ng-pristine ng-valid ng-touched"></textarea>
             </div>
