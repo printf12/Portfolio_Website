@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Blog } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
@@ -12,35 +13,49 @@ import { BlogService } from 'src/app/shared/blog.service';
 })
 export class CreateBlogFormComponent implements OnInit {
 
+  fromData: Blog = new  Blog();
+  
+  imageSrc: string;
 
   constructor(public service:BlogService, private toastr:ToastrService) { }
+
+  
 
   ngOnInit(): void {
   }
 
   onSubmit(form:NgForm){
-    this.service.postCreateNewBlog().subscribe(
+    this.service.postCreateNewBlog(this.fromData).subscribe(
     res => {
       console.log(res);
       this.onReset(form);
       this.toastr.success('Submitted successfully', 'Post Created')
-
     },
     err => { console.log(err); }
     );
   }
+
   onReset(form:NgForm){
     form.form.reset();
-    this.service.fromData = new Blog();
+    this.fromData = new Blog();
   }
 
-  upladoImage(event:any){
-    var file = event.target.files[0];
-    const formData:FormData=new FormData();
-
-    this.service.UploadPhoto(formData).subscribe((data:any)=>{
-      this.service.fromData.imageUrl = this.service.imageUrl;
-    })
+  uploadImage(event:any){
+    const reader = new FileReader();
+    if(event.target.files && event.target.files.length) {
+      var file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result as string;
+   
+      };
+     
+      var imageName = event.target.files[0].name;
+      this.fromData.imageUrl = imageName;
+      this.fromData.creationDay = new Date();
+    }
+    
   }
 
 }

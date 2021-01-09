@@ -5,7 +5,7 @@ export class Blog {
     blogPostId: number;
     blogPostType:BlogPostType
     title:string;
-    creationDay:Moment;
+    creationDay:Date;
     description:string;
     imageUrl: string;
 

@@ -9,17 +9,13 @@ import { Blog } from './blog.model';
 export class BlogService {
 
   constructor(private http: HttpClient) {}  
-  fromData: Blog = new Blog();
+  
   list : Blog[];
   readonly baseURl = 'https://localhost:44376/api/BlogPost';
-  readonly imageUrl = "https://localhost:44376/Resources/Images/";
   fileToUpload: File | null;
 
-  postCreateNewBlog(){
-    return this.http.post(this.baseURl, this.fromData);
-  }
-  UploadPhoto(val:any){
-    return this.http.post(this.imageUrl, this.fromData);
+  postCreateNewBlog(formData: any){
+    return this.http.post(this.baseURl, formData);
   }
 
   getBlogs(){
