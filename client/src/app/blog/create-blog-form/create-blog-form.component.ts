@@ -12,6 +12,7 @@ import { BlogService } from 'src/app/shared/blog.service';
 })
 export class CreateBlogFormComponent implements OnInit {
 
+
   constructor(public service:BlogService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,7 @@ export class CreateBlogFormComponent implements OnInit {
   onSubmit(form:NgForm){
     this.service.postCreateNewBlog().subscribe(
     res => {
+      console.log(res);
       this.onReset(form);
       this.toastr.success('Submitted successfully', 'Post Created')
 

@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { empty } from 'rxjs';
 export class Blog {
 
     blogPostId: number;
@@ -6,6 +7,7 @@ export class Blog {
     title:string;
     creationDay:Moment;
     description:string;
+    fileToupload: File;
 
 }
 

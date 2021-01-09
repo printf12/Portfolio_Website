@@ -34,10 +34,17 @@
              </div>
 
              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Upload Image (*)</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-              </div>
+                <div _ngcontent-qsp-c48="" class="form-group">
+                    <label _ngcontent-qsp-c48="">Upload</label>
+                    <div _ngcontent-qsp-c48="" class="clearfix">
+                        <img [src]="service.imageUrl" style="width: 250px; height: 250px;">
+                        <input _ngcontent-qsp-c48="" name="upload" type="file" class="btn btn-flat-solid btn-file btn-xs btn-default clearfix" accept="image/*" 
+                        #upload="ngModel" [(ngModel)]="service.fromData.fileToupload"
+                        required [class.invalid]="dayOfCreation.invalid
+                        && dayOfCreation.touched"
+                        (change)="service.handleFileInput($event.target.files)"/>
+                    </div>
+            </div>
             </div>
             <div class="col-md-6">
             <div class="form-group">
@@ -55,53 +62,8 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-flat-solid primary-btn" [disabled]="form.invalid">Create Blog</button>
-                <button type="submit" class="btn btn-flat-solid primary-btn" [disabled]="form.invalid">Reset</button>
             </div>
          </form>
-
-        <!-- <form #form="ngForm" (submit)="onSubmit(form)">
-        <input type="hidden" name="blogPostId"
-        [value]="service.fromData.blogPostId">
-    
-        <div class="form-group">
-            <label>BlogType</label>
-            <select class="form-control" name="blogType" id="blog_type" [(ngModel)]="service.fromData.blogPostType"
-            #blogType="ngModel" required [class.invalid]="blogType.invalid
-            && blogType.touched">
-            <option [ngValue]="0">{{ ("None") }}</option>
-            <option [ngValue]="1">{{ ("Checklists") }}</option>
-            <option [ngValue]="2">{{ ("Infographics") }}</option>
-            <option [ngValue]="3">{{ ("Interviews") }}</option>
-            <option [ngValue]="4">{{ ("GuestBlogging") }}</option>
-            <option [ngValue]="5">{{ ("PersonalStories") }}</option>
-        </select>
-        </div>
-
-        <div class="form-group">
-            <label>Title</label>
-            <input class="form-control form-control-lg" placeholder="Title"
-            name="title" #title="ngModel" [(ngModel)]="service.fromData.title" required [class.invalid]="title.invalid
-            && title.touched">
-        </div>
-        <div class="form-group">
-            <label>DayOfCreation</label>
-            
-            <dp-date-picker name="dayOfCreation" #dayOfCreation="ngModel" [(ngModel)]="service.fromData.creationDay" required [class.invalid]="dayOfCreation.invalid
-            && dayOfCreation.touched"> </dp-date-picker>
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <input class="form-control form-control-lg" placeholder="description"
-            name="description" #description="ngModel" [(ngModel)]="service.fromData.description" required [class.invalid]="description.invalid
-            && description.touched">
-        </div>
-
-        <div class="form-group">
-            <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">create</button>
-            <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">reset</button>
-        </div>
-    </form> -->
     </div>
     </div>
     </div>
