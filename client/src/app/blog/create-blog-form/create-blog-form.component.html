@@ -6,32 +6,31 @@
         <h2>CreateBlog</h2>
         <form novalidate="" class="ng-pristine ng-valid ng-touched" #form="ngForm" (submit)="onSubmit(form)">
 
-            <input type="hidden" name="blogPostId"
-            [value]="fromData.blogPostId">
+            <input type="hidden" name="blogPostId" [value]="formData.blogPostId">
 
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
                       <label>Title(*)</label>
                       <input class="form-control form-flat ng-untouched ng-pristine ng-valid" placeholder="Title"
-                      name="title" #title="ngModel" [(ngModel)]="fromData.title" required [class.invalid]="title.invalid
+                      name="title" #title="ngModel" [(ngModel)]="formData.title" required [class.invalid]="title.invalid
                       && title.touched">
                     </div>
                </div>
                <div class="col-md-4">
-                <div class="form-group">
-                    <label>Blog Type (*)</label>
-                    <select class="form-control form-flat ng-untouched ng-pristine ng-valid" name="blogType" id="blog_type" [(ngModel)]="fromData.blogPostType"
-                    #blogType="ngModel" required [class.invalid]="blogType.invalid && blogType.touched">
-                    <option [ngValue]="0">{{ ("None") }}</option>
-                    <option [ngValue]="1">{{ ("Checklists") }}</option>
-                    <option [ngValue]="2">{{ ("Infographics") }}</option>
-                    <option [ngValue]="3">{{ ("Interviews") }}</option>
-                    <option [ngValue]="4">{{ ("GuestBlogging") }}</option>
-                    <option [ngValue]="5">{{ ("PersonalStories") }}</option>
-                </select>
-                  </div>
-             </div>
+                    <div class="form-group">
+                        <label>Blog Type (*)</label>
+                        <select class="form-control form-flat ng-untouched ng-pristine ng-valid" name="blogType" id="blog_type" [(ngModel)]="formData.blogPostType"
+                        #blogType="ngModel" required [class.invalid]="blogType.invalid && blogType.touched">
+                        <option [ngValue]="0">{{ ("None") }}</option>
+                        <option [ngValue]="1">{{ ("Checklists") }}</option>
+                        <option [ngValue]="2">{{ ("Infographics") }}</option>
+                        <option [ngValue]="3">{{ ("Interviews") }}</option>
+                        <option [ngValue]="4">{{ ("GuestBlogging") }}</option>
+                        <option [ngValue]="5">{{ ("PersonalStories") }}</option>
+                        </select>
+                    </div>
+                </div>
 
              <div class="col-md-4">
                 <div _ngcontent-qsp-c48="" class="form-group">
@@ -39,20 +38,15 @@
                     <div _ngcontent-qsp-c48="" class="clearfix">
                         <img [src]="imageSrc" style="width: 250px; height: 250px;">
                         <input _ngcontent-qsp-c48="" name="upload" type="file" class="btn btn-flat-solid btn-file btn-xs btn-default clearfix" accept="image/*" 
-                        #upload="ngModel" [(ngModel)]="fromData.imageUrl"
-                        
-                        
+                        #upload="ngModel" [(ngModel)]="formData.imageUrl"
                         (change)="uploadImage($event)"/>
                     </div>
+                </div>
             </div>
-            </div>
-
-           
-
             </div>
             <div class="form-group">
                 <label>Description(*)</label>
-                <textarea name="description" #description="ngModel" [(ngModel)]="fromData.description" required [class.invalid]="description.invalid
+                <textarea name="description" #description="ngModel" [(ngModel)]="formData.description" required [class.invalid]="description.invalid
                 && description.touched" rows="6" class="form-control form-flat ng-pristine ng-valid ng-touched"></textarea>
             </div>
             <div class="form-group">

@@ -10,7 +10,7 @@ export class CommentService {
 
   comments: Comment[] = [];
   
-  getCommentsByBlogId(blogId){
+  getCommentsByBlogId(blogId: any){
     console.log(blogId);
     return this.http.get("https://localhost:44376/api/comment"+"/"+blogId).toPromise().then(res => this.comments = res as Comment[])
   }

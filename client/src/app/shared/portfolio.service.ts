@@ -24,11 +24,11 @@ export class PortfolioService {
     return this.http.get(this.baseURl+'/'+id).toPromise().then(res => this.list = res as Portfolio[]);
   }
 
-  getPortfolioByCount(portfoliosCount){
+  getPortfolioByCount(portfoliosCount: any){
     return this.http.get(this.baseURl+'/PortfoliosCount/'+portfoliosCount).toPromise();
   }
 
-  getPagePerIndex(paginationIndex){
+  getPagePerIndex(paginationIndex: any){
     return this.http.get(this.baseURl+'/PortfolioPerPage/'+paginationIndex).toPromise();
   }
 }

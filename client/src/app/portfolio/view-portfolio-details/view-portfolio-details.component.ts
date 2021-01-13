@@ -8,7 +8,7 @@ import { PortfolioService } from 'src/app/shared/portfolio.service';
   templateUrl: './view-portfolio-details.component.html'
 })
 export class ViewPortfolioDetailsComponent implements OnInit {
-  portfolioDetails:Portfolio[] = [];
+  portfolioDetails:any = [];
 
   constructor(public service:PortfolioService, private route:ActivatedRoute) { }
 

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { read } from 'fs';
 import { Blog } from './blog.model';
 
 @Injectable({
@@ -15,6 +14,7 @@ export class BlogService {
   fileToUpload: File | null;
 
   postCreateNewBlog(formData: any){
+    
     return this.http.post(this.baseURl, formData);
   }
 
@@ -26,7 +26,17 @@ export class BlogService {
     return this.http.get(this.baseURl+'/'+id).toPromise();
   }
 
-  getBlogsByCount(blogsCount){
+  getBlogsByCount(blogsCount: any){
     return this.http.get(this.baseURl+'/BlogsCount/'+blogsCount).toPromise();
+  }
+
+  uploadFileProcess(file:any){
+    console.log(file);
+    
+    return this.http.post(this.baseURl+'/uploadFile', file, {reportProgress: true, observe: 'events'});
+  }
+
+  getBlogImage(imageName:any){
+    return this.http.get(this.baseURl+'/GetBlogImage/'+imageName).toPromise();
   }
 }

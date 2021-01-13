@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { BlogPostType } from '../shared/blog.model';
+import { Blog, BlogPostType } from '../shared/blog.model';
 import { BlogService } from '../shared/blog.service';
 import { PortfolioService } from '../shared/portfolio.service';
 
@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
 
   projects: any = [];
   blogs: any = [];
+
+  blogsData: any = [];
+  moreBlogs: any = [];
+  
   constructor(private http: HttpClient, public service:PortfolioService, private blogService: BlogService) {}
 
   ngOnInit(){
@@ -32,7 +36,8 @@ export class HomeComponent implements OnInit {
   getBlogs(){
     this.blogService.getBlogs().then(response =>{
       console.log(response);
-      response.forEach(element => {
+      this.blogsData = response;
+      this.blogsData.forEach((element: any) => {
         element.blogPostType = BlogPostType[element.blogPostType];
       });
       this.blogs = response;
@@ -41,7 +46,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  showMoreProjects(projectsCount) {
+  showMoreProjects(projectsCount: any) {
     console.log(projectsCount);
     this.service.getPortfolioByCount(projectsCount).then(response =>{
       console.log(response);
@@ -51,10 +56,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  showMoreBlogs(blogsCount) {
+  showMoreBlogs(blogsCount: any) {
     this.blogService.getBlogsByCount(blogsCount).then(response =>{
       console.log(response);
-      response.forEach(element => {
+      this.moreBlogs = response;
+      this.moreBlogs.forEach((element: any) => {
         element.blogPostType = BlogPostType[element.blogPostType];
       });
       this.blogs = response;

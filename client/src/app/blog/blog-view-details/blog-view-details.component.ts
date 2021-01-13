@@ -13,12 +13,13 @@ import { CommentService } from 'src/app/shared/comment.service';
 })
 export class BlogViewDetailsComponent implements OnInit {
   data:any;
-  blogDetails:Blog[] = [];
+  blogDetails:any = [];
   comment: any = {};
+  blogData: any = [];
   constructor(private toastr:ToastrService, public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
 
-  comments:Comment[]= [];
-  commentsUpdated:Comment[]= [];
+  comments:any[]= [];
+  commentsUpdated:any[]= [];
   
   showCommentReplyInput = false;
   showComments = true;
@@ -28,14 +29,15 @@ export class BlogViewDetailsComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get("id");
     this.service.getBlogById(id).then(response => {
       console.log(response);
-      let blogType = BlogPostType[response.blogPostType];
-      response['blogType'] = blogType;
-      this.blogDetails = response;
+      this.blogData = response;
+      let blogType = BlogPostType[this.blogData.blogPostType];
+      this.blogData["blogType"] = blogType;
+      this.blogDetails = this.blogData;
     });
     this.getCommentsByBlogId(id);
   }
 
-  getCommentsByBlogId(blogId){
+  getCommentsByBlogId(blogId: any){
     this.comments = [];
     this.commentService.getCommentsByBlogId(blogId).then(response => {
       this.comments = response;

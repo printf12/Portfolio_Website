@@ -25,7 +25,7 @@ export class PortfolioComponent implements OnInit {
 
   async getBlogsCount(){
     let numb = 1;
-    return await this.service.getPortfolios().then(res => {
+    return await this.service.getPortfolios().then((res: any) => {
       console.log(res);
       let resultCount = res.length;
       let loops = resultCount / 6;
@@ -46,7 +46,7 @@ export class PortfolioComponent implements OnInit {
     });
   }
 
-  getPagePerIndex(paginationIndex){
+  getPagePerIndex(paginationIndex: any){
     this.service.getPagePerIndex(paginationIndex).then(res => {
       console.log(res);
       this.projects = res;

@@ -9,13 +9,26 @@ import { BlogService } from '../shared/blog.service';
 export class BlogComponent implements OnInit {
   
   blogs: any = [];
-  
+  filePath: string;
   constructor(public service : BlogService) { }
 
   ngOnInit(): void {
-    this.service.getBlogs().then(res => {
+    this.service.getBlogs().then((res: any) => {
       this.blogs = res;
     });
+      //res.forEach((blog:any) => {
+        
+        /*if(blog.imageUrl == "OIP.jfif"){
+          console.log(blog.imageUrl);
+          this.service.getBlogImage(blog.imageUrl).then(res => {
+            console.log(res);
+           });
+        }*/
+       
+      //});
+      //this.blogs = res;
+      //console.log(res);
+    //});
   }
 
 }

@@ -11,6 +11,8 @@ import { PortfolioService } from 'src/app/shared/portfolio.service';
 })
 export class CreatePortfolioFormComponent implements OnInit {
 
+  formData: any = {};
+
   constructor(public service:PortfolioService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class CreatePortfolioFormComponent implements OnInit {
   }
   onReset(form:NgForm){
     form.form.reset();
-    this.service.fromData = new Portfolio();
+    this.formData = new Portfolio();
   }
 
 }

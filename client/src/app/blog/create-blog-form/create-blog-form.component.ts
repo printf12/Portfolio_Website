@@ -13,10 +13,11 @@ import { BlogService } from 'src/app/shared/blog.service';
 })
 export class CreateBlogFormComponent implements OnInit {
 
-  fromData: Blog = new  Blog();
+  formData: any = {};
+  fileFormData: any ;
   
   imageSrc: string;
-
+  
   constructor(public service:BlogService, private toastr:ToastrService) { }
 
   
@@ -25,11 +26,16 @@ export class CreateBlogFormComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    this.service.postCreateNewBlog(this.fromData).subscribe(
+    this.service.postCreateNewBlog(this.formData).subscribe(
     res => {
+      this.service.uploadFileProcess(this.fileFormData).subscribe(res => {
+        console.log("fileUploaded");
+      })
       console.log(res);
       this.onReset(form);
-      this.toastr.success('Submitted successfully', 'Post Created')
+      this.toastr.success('Submitted successfully', 'Post Created');
+      this.toastr.success('Upload successfully', 'Image Uploaded');
+
     },
     err => { console.log(err); }
     );
@@ -37,25 +43,33 @@ export class CreateBlogFormComponent implements OnInit {
 
   onReset(form:NgForm){
     form.form.reset();
-    this.fromData = new Blog();
+    this.formData = new Blog();
   }
 
   uploadImage(event:any){
     const reader = new FileReader();
     if(event.target.files && event.target.files.length) {
       var file = event.target.files[0];
+
+      console.log(file.name);
+
+      this.fileFormData = new FormData();
+      this.fileFormData.append('file', file, file.name);
+      
       reader.readAsDataURL(file);
+      
       reader.onload = () => {
-   
         this.imageSrc = reader.result as string;
-   
       };
-     
-      var imageName = event.target.files[0].name;
-      this.fromData.imageUrl = imageName;
-      this.fromData.creationDay = new Date();
+      var imgName = (event.target.files[0].name).split('.');
+
+      var imageName =  imgName[0] + "_" + Date.now() +"."+ imgName[1];
+      this.formData.imageUrl = imageName;
+      this.formData.creationDay = new Date();
+
+      this.fileFormData = new FormData();
+      this.fileFormData.append('file', file, imageName);
     }
-    
   }
 
 }

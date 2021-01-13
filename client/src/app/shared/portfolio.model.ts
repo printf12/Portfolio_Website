@@ -1,6 +1,6 @@
 export class Portfolio {
-id:number;
-image:string;
-description:string;
-titel:string;
+Id:number;
+Image:string;
+Description:string;
+Titel:string;
 }
