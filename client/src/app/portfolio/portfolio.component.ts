@@ -15,32 +15,36 @@ export class PortfolioComponent implements OnInit {
 
   constructor(public service : PortfolioService) { }
  
-
   ngOnInit(): void {
-    this.getBlogsCount();
+    this.getPorfolioCount();
     this.service.getPortfolioByCount(3).then(res => {
       this.projects = res;
     })
   }
 
-  async getBlogsCount(){
+  getPorfolioCount(){
     let numb = 1;
-    return await this.service.getPortfolios().then((res: any) => {
-      console.log(res);
+    return this.service.getPortfolios().then((res: any) => {
       let resultCount = res.length;
       let loops = resultCount / 6;
-      console.log(loops);
       if(Number.isInteger(loops)){
         for(let i = 1; i <= Math.round(resultCount / 6); i++){
           this.numbersArray.push(i);
         }
-        console.log(this.numbersArray);
       }
       else {
-        for(let i = 1; i <= Math.round(resultCount / 6)+1; i++){
-          this.numbersArray.push(i);
+        let commaValue = (loops.toString().split("."))[1].substr(0, 1);
+        console.log(commaValue);
+        if(parseInt(commaValue) >= 5){
+          for(let i = 1; i <= Math.round(resultCount / 6); i++){
+            this.numbersArray.push(i);
+          }
         }
-        console.log(this.numbersArray);
+        else {
+          for(let i = 1; i <= Math.round(resultCount / 6) + 1; i++){
+            this.numbersArray.push(i);
+          }
+        }
 
       }
     });

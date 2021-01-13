@@ -48,11 +48,9 @@
 
         <!--Pagination-->
         <div class="text-center">
-          <ul class="pagination   flat-pagination ">
+          <ul class="pagination flat-pagination ">
             <li><a href="#">Prev</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><span>2</span></li>
-            <li><a href="#">3</a></li>
+            <li *ngFor="let item of numbersArray; let i = index" (click)="getPagePerIndex(i)"><span>{{item}}</span></li>
             <li><a href="#">Next</a></li>
           </ul>
         </div>

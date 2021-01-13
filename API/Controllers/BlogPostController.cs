@@ -46,18 +46,7 @@ namespace API.Controllers
             return blogPost;
         }
 
-        // GET: api/Blog/blogCount
-        [HttpGet("BlogsCount/{blogCount}")]
-        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogMore(int blogCount)
-        {
-            var blogs = await _context.BlogPost.Take(blogCount + 3).ToListAsync();
-            if (blogs == null)
-            {
-                return NotFound();
-            }
-
-            return blogs;
-        }
+        
 
         // PUT: api/BlogPost/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -89,6 +78,28 @@ namespace API.Controllers
             }
 
             return NoContent();
+        }
+
+         // GET: api/BlogsCount/1
+        [HttpGet("BlogsCount/{blogCount}")]
+        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogsMore(int blogCount)
+        {
+            var blogs = await _context.BlogPost.Take(blogCount + 3).ToListAsync();
+
+            if (blogs == null)
+            {
+                return NotFound();
+            }
+
+            return blogs;
+        }
+
+
+        // GET: api/Blog
+        [HttpGet("BlogPerPage/{pageIndex}")]
+        public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPerPage(int pageIndex)
+        {
+            return await _context.BlogPost.Skip(pageIndex * 6).Take(6).ToListAsync();
         }
 
         // POST: api/BlogPost

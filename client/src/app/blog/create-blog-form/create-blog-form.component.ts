@@ -20,8 +20,6 @@ export class CreateBlogFormComponent implements OnInit {
   
   constructor(public service:BlogService, private toastr:ToastrService) { }
 
-  
-
   ngOnInit(): void {
   }
 

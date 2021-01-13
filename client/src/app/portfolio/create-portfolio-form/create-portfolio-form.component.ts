@@ -20,7 +20,7 @@ export class CreatePortfolioFormComponent implements OnInit {
 
 
   onSubmit(form:NgForm){
-    this.service.postCreateNewPortfolio().subscribe(
+    this.service.postCreateNewPortfolio(this.formData).subscribe(
     res => {
       this.onReset(form);
       this.toastr.success('Submitted successfully', 'Portfolio Created')

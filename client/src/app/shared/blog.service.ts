@@ -39,4 +39,8 @@ export class BlogService {
   getBlogImage(imageName:any){
     return this.http.get(this.baseURl+'/GetBlogImage/'+imageName).toPromise();
   }
+
+  getPagePerIndex(paginationIndex: any){
+    return this.http.get(this.baseURl+'/BlogPerPage/'+paginationIndex).toPromise();
+  }
 }

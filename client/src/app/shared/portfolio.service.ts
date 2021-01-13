@@ -8,12 +8,12 @@ import { Portfolio } from './portfolio.model';
 export class PortfolioService {
 
   constructor(private http: HttpClient) {}  
-  fromData: Portfolio = new Portfolio();
+  //fromData: Portfolio = new Portfolio();
   list : Portfolio[];
   readonly baseURl = 'https://localhost:44376/api/Portfolio';
 
-  postCreateNewPortfolio(){
-    return this.http.post(this.baseURl, this.fromData);
+  postCreateNewPortfolio(fromData: any){
+    return this.http.post(this.baseURl, fromData);
   }
 
   getPortfolios(){
