@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Blog, BlogPostType } from 'src/app/shared/blog.model';
@@ -16,7 +18,9 @@ export class BlogViewDetailsComponent implements OnInit {
   blogDetails:any = [];
   comment: any = {};
   blogData: any = [];
-  constructor(private toastr:ToastrService, public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
+  url: any;
+  imageUrl: any;
+  constructor( private sanitizer: DomSanitizer, private http: HttpClient, private toastr:ToastrService, public service:BlogService,public commentService: CommentService,  private route:ActivatedRoute, private router: Router) { }
 
   comments:any[]= [];
   commentsUpdated:any[]= [];
@@ -27,8 +31,12 @@ export class BlogViewDetailsComponent implements OnInit {
 
   ngOnInit(){ 
     let id = this.route.snapshot.paramMap.get("id");
-    this.service.getBlogById(id).then(response => {
+    this.service.getBlogById(id).then((response: any) => {
       console.log(response);
+      this.http.get("https://localhost:44376/api/BlogPost/GetImage/"+response.imageUrl, { responseType: 'blob' }).subscribe((file: any) => {
+          this.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+          this.imageUrl = this.url;
+        });
       this.blogData = response;
       let blogType = BlogPostType[this.blogData.blogPostType];
       this.blogData["blogType"] = blogType;
