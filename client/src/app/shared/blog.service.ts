@@ -14,8 +14,11 @@ export class BlogService {
   fileToUpload: File | null;
 
   postCreateNewBlog(formData: any){
-    
     return this.http.post(this.baseURl, formData);
+  }
+
+  getBlogsCount(){
+    return this.http.get(this.baseURl + '/GetBlogsCount').toPromise();
   }
 
   getBlogs(){

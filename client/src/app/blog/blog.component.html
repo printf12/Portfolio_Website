@@ -22,14 +22,15 @@
             </span>
           </div>
         </form>--><!-- END FORM SEARCH-->
-
+        
         <!-- LIST BLOG-->
         <ul class="list-unstyled list-blog">
-          <li *ngFor="let blog of blogs">
+          <li *ngFor="let blog of blogs ; let i = index;">
             <div class="clearfix box-blog">
-              <img src="{{filePath}}">
-              <div class="blog-bg" data-holdbg="assets/theme/images/blog/1.jpg" style="background-image: url(&quot;assets/theme/images/blog/1.jpg&quot;);">&nbsp;
-                <div class="blog-ic"><i class="fa fa-pencil"></i></div>
+              
+              <div class="blog-bg" >
+                <img [src]="images[i]"/>
+                <!--<div class="blog-ic"><i class="fa fa-pencil"></i></div>-->
               </div>
               <div class="blog-content">
                 <h5 class="text-uppercase color-dark text-bold">{{blog.title}}.</h5>

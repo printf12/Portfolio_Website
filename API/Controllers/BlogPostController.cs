@@ -11,6 +11,8 @@ using API.Helpers;
 using System.IO;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using DocumentFormat.OpenXml.Drawing.ChartDrawing;
 
 namespace API.Controllers
 {
@@ -46,7 +48,7 @@ namespace API.Controllers
             return blogPost;
         }
 
-        
+
 
         // PUT: api/BlogPost/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -80,7 +82,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-         // GET: api/BlogsCount/1
+        // GET: api/BlogsCount/1
         [HttpGet("BlogsCount/{blogCount}")]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogsMore(int blogCount)
         {
@@ -92,6 +94,14 @@ namespace API.Controllers
             }
 
             return blogs;
+        }
+
+        // GET: api/BlogsCount/1
+        [HttpGet("GetBlogsCount")]
+        public int GetBlogsCount()
+        {
+            var blogsCount =  _context.BlogPost.ToList().Count;
+            return blogsCount;
         }
 
 
@@ -155,34 +165,21 @@ namespace API.Controllers
 
         }
 
-
-        //GET api/BlogImage
-        //[HttpGet("GetBlogImage/{photoName}")]
+        [HttpGet("GetImage/{imageName}")]
+        [Produces("image/png")]
+        public IActionResult GetImage(string imageName)
         
-        //public IActionResult GetBlogImage(string photoName)
-        //{
-        //    try
-        //    {
-               
-        //        var photo = _context.BlogPost.FirstOrDefault(x => x.ImageUrl == photoName);
+        {
+            var folderName = Path.Combine("Resources", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var fullPath = Path.Combine(pathToSave, imageName);
+            //path = picture.Path;
+            var file = Path.Combine(Directory.GetCurrentDirectory(), fullPath);
+            //return PhysicalFile(file, "image/png");
+            if (!System.IO.File.Exists(file)) return NotFound();
 
-        //        if (photo == null) return NotFound();
-
-        //        var fileName = photo.ImageUrl;
-        //        var uploadFilesPath = Path.Combine("Resources", "Images");
-        //        var filePath = Path.Combine(uploadFilesPath, fileName);
-
-        //        if (!System.IO.File.Exists(filePath)) return NotFound();
-
-                
-        //        return File(filePath, fileName, "image/jpeg");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
+            return PhysicalFile(file, "image/jpeg");
+        }
 
     }
 }

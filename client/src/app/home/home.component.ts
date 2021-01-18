@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Blog, BlogPostType } from '../shared/blog.model';
 import { BlogService } from '../shared/blog.service';
 import { PortfolioService } from '../shared/portfolio.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +18,24 @@ export class HomeComponent implements OnInit {
 
   blogsData: any = [];
   moreBlogs: any = [];
-  
-  constructor(private http: HttpClient, public service:PortfolioService, private blogService: BlogService) {}
+
+  url: any;
+  images: any = [];
+
+  imageUrl: any;
+
+  constructor(private http: HttpClient, public service: PortfolioService, private blogService: BlogService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(){
     this.showMoreProjects(this.projects.length);
     this.showMoreBlogs(this.blogs.length);
+  }
+
+  getFile(imageName: string): any {
+    return this.http.get("https://localhost:44376/api/BlogPost/GetImage/"+ imageName, { responseType: 'blob' }).subscribe((file: any) => {
+         let test = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+         this.imageUrl = test;
+    });
   }
 
   getProjects(){
@@ -34,7 +48,8 @@ export class HomeComponent implements OnInit {
   }
 
   getBlogs(){
-    this.blogService.getBlogs().then(response =>{
+    this.blogService.getBlogs().then((response:any) =>{
+      
       console.log(response);
       this.blogsData = response;
       this.blogsData.forEach((element: any) => {
@@ -57,8 +72,13 @@ export class HomeComponent implements OnInit {
   }
 
   showMoreBlogs(blogsCount: any) {
-    this.blogService.getBlogsByCount(blogsCount).then(response =>{
-      console.log(response);
+    this.blogService.getBlogsByCount(blogsCount).then((response:any) =>{
+      response.forEach((blog: any) => {
+        this.http.get("https://localhost:44376/api/BlogPost/GetImage/"+blog.imageUrl, { responseType: 'blob' }).subscribe((file: any) => {
+          this.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+          this.images.push(this.url);
+        });
+      });
       this.moreBlogs = response;
       this.moreBlogs.forEach((element: any) => {
         element.blogPostType = BlogPostType[element.blogPostType];

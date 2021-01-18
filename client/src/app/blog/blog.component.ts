@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { BlogService } from '../shared/blog.service';
 
 @Component({
@@ -11,7 +13,10 @@ export class BlogComponent implements OnInit {
   blogs: any = [];
   filePath: string;
   numbersArray: any = [];
-  constructor(public service : BlogService) { }
+  imageUrl: any;
+  url: any;
+  images: any = [];
+  constructor(public service : BlogService, private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getBlogsCount();
@@ -20,9 +25,26 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  getBlogsCount(){
-    let numb = 1;
-    return this.service.getBlogs().then((res: any) => {
+  getFile(imageName: string) {
+    return this.http.get("https://localhost:44376/api/BlogPost/GetImage/"+ imageName, { responseType: 'blob' }).subscribe((file: any) => {
+         let url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+         return url;
+         //return url;
+    });
+  }
+
+  async getBlogsCount(){
+    
+    await this.service.getBlogs().then((res: any) => {
+      res.forEach((blog: any) => {
+        this.http.get("https://localhost:44376/api/BlogPost/GetImage/"+blog.imageUrl, { responseType: 'blob' }).subscribe((file: any) => {
+          this.url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+          this.images.push(this.url);
+        });
+      });
+      console.log(this.images);
+      
+      let numb = 1;
       let resultCount = res.length;
       let loops = resultCount / 6;
       if(Number.isInteger(loops)){
@@ -43,7 +65,6 @@ export class BlogComponent implements OnInit {
             this.numbersArray.push(i);
           }
         }
-
       }
     });
   }

@@ -9,8 +9,8 @@
         <div class="my-pict">
           <div class="overfly">
             <div class="text-botttom">
-              <h2 class="text-uppercase color-dark text-bold">Oussema Ach.</h2>
-              <h5 class="text-uppercase color-dark font-alt ">Whatsup</h5>
+              <h2 class="text-uppercase color-dark text-bold">Hans Website</h2>
+              <h5 class="text-uppercase color-dark font-alt ">Home Page</h5>
             </div>
           </div>
         </div>
@@ -89,10 +89,10 @@
                 <div class="work-preview">
                   <img src="{{project.image}}" alt="">
                   <div class="hover">
-                    <div class="link-btns">
+                    <!--<div class="link-btns">
                       <a href="{{project.titel}}" title="{{project.titel}}" class="galery-item"><i class="fa fa-search-plus"></i></a>
                       <a href="{{project.titel}}"><i class="fa fa-link"></i></a>
-                    </div>
+                    </div>-->
                     <a [routerLink] = "['/portfolioView', project.id]" class="project-title">{{project.titel}}</a>
                   </div>
                 </div>
@@ -169,9 +169,10 @@
           <!--LIST BLOG-->
           <ul class="list-unstyled list-blog">
             <li>
-              <div *ngFor="let blog of blogs" class="clearfix box-blog">
-                <div class="blog-bg" data-holdbg="https://picsum.photos/id/1025/200" style="background-image: url(&quot;assets/theme/images/blog/1.jpg&quot;);">&nbsp;
-                  <div class="blog-ic"><i class="fa fa-pencil"></i></div>
+              <div *ngFor="let blog of blogs; let i = index;" class="clearfix box-blog">
+                <div class="blog-bg" >
+                  <img [src]="images[i]"/>
+                  <!--<div class="blog-ic"><i class="fa fa-pencil"></i></div>-->
                 </div>
                 <div class="blog-content">
                   <h5 class="text-uppercase color-dark text-bold">{{blog.title}}</h5>
